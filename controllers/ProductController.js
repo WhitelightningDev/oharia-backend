@@ -7,11 +7,12 @@ const createProduct = async (req, res) => {
     const image = req.file ? req.file.path : ''; // This should work, but ensure you're receiving the file
 
     // Destructure the other fields
-    const { name, description, price, category, stock } = req.body;
+    const { name, shortdescription, description, price, category, stock } = req.body;
 
     // Create the product object
     const product = new Product({
       name,
+      shortdescription,
       description,
       price,
       category,
@@ -54,7 +55,7 @@ const getProductById = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     // Destructure the updated product details from req.body
-    const { name, description, price, category, stock } = req.body;
+    const { name, shortdescription, description, price, category, stock } = req.body;
 
     // Get the image path from req.file (if an image is uploaded)
     const image = req.file ? req.file.path : '';
@@ -65,6 +66,7 @@ const updateProduct = async (req, res) => {
 
     // Update the product fields
     product.name = name || product.name;
+    product.shortdescription = shortdescription || product.shortdescription;
     product.description = description || product.description;
     product.price = price || product.price;
     product.category = category || product.category;
